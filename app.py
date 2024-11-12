@@ -41,6 +41,9 @@ def load_sample_images(folder_path="public/samples"):
 
 def create_sample_gallery():
     """Create a gallery of sample MRI scans"""
+    if 'selected_image' not in st.session_state:
+        st.session_state.selected_image = None
+
     st.write("## Sample MRI Scans")
     st.write("Click on any sample image to analyze it, or upload your own below.")
     
@@ -67,7 +70,7 @@ def create_sample_gallery():
                 key=f"sample_{idx}",
                 help=f"Click to analyze {img_data['name']}",
             ):
-                return img_data['path']
+                st.session_state.selected_image = img_data['path']
             
             # Display image
             st.image(
@@ -76,7 +79,7 @@ def create_sample_gallery():
                 use_column_width=True
             )
     
-    return None
+    return st.session_state.selected_image
 
 def generate_explanation(img_path, model_prediction, confidence):
     # First prompt to generate an initial explanation
@@ -219,15 +222,24 @@ def load_xception_model(model_path):
 st.title("Brain Tumor Classification")
 
 # Add sample gallery
+if 'selected_image' not in st.session_state:
+    st.session_state.selected_image = None
+
 selected_sample = create_sample_gallery()
+
+if st.session_state.selected_image is not None:
+    st.success("Sample image selected! Analyzing...")
+    if st.button("Clear Selection"):
+        st.session_state.selected_image = None
+        st.experimental_rerun()
 
 st.write("Upload an image of a brain MRI scan to classify.")
 
 uploaded_file = st.file_uploader("Choose an image...", type =["jpg", "jpeg", "png"])
 
-if uploaded_file is not None or selected_sample is not None:
+if uploaded_file is not None or st.session_state.selected_image is not None:
   
-  input_image = uploaded_file if uploaded_file is not None else selected_sample
+  input_image = uploaded_file if uploaded_file is not None else st.session_state.selected_image
 
   selected_model = st.radio(
       "Select Model",
