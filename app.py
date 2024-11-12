@@ -228,8 +228,8 @@ if 'selected_image' not in st.session_state:
 selected_sample = create_sample_gallery()
 
 if st.session_state.selected_image is not None:
-    st.success(f"Analyzing selected image: {os.path.basename(st.session_state.selected_image)}")
-    
+    st.success(f"Analyzing selected image: {os.path.basename(st.session_state.selected_image)}. To avoid rendering issues, please wait for the results to load before selecting another image.")
+
 st.write("Upload an image of a brain MRI scan to classify.")
 
 uploaded_file = st.file_uploader("Choose an image...", type =["jpg", "jpeg", "png"])
