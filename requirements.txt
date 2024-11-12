@@ -2,9 +2,10 @@ streamlit
 tensorflow
 numpy
 plotly
-opencv-python
 pillow
 google-generativeai
 python-dotenv
 keras
-opencv-python-headless 
+opencv-python-headless==4.8.1.78
+python-multipart
+--extra-index-url https://download.pytorch.org/whl/cpu
