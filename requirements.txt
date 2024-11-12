@@ -7,4 +7,4 @@ pillow
 google-generativeai
 python-dotenv
 keras
-firebase-admin
+opencv-python-headless
