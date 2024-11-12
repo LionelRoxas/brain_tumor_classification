@@ -2,8 +2,9 @@ streamlit
 tensorflow
 numpy
 plotly
-opencv-python-headless 
+opencv-python
 pillow
 google-generativeai
 python-dotenv
 keras
+opencv-python-headless 
