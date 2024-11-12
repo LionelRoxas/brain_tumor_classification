@@ -47,36 +47,6 @@ def create_sample_gallery():
     st.write("## Sample MRI Scans")
     st.write("Click on any sample image to analyze it, or upload your own below.")
     
-    # Custom CSS for the gallery
-    st.markdown("""
-        <style>
-        div.stButton > button {
-            width: 100%;
-            height: 100%;
-            padding: 0;
-            background-color: transparent;
-            border: none;
-        }
-        div.stButton > button:hover {
-            border: 2px solid #2196F3;
-            transform: scale(1.02);
-            transition: transform 0.2s;
-        }
-        div.stButton > button:focus {
-            border: 3px solid #2196F3;
-            box-shadow: 0 0 10px rgba(33,150,243,0.5);
-        }
-        .image-caption {
-            text-align: center;
-            color: #ffffff;
-            background-color: rgba(0,0,0,0.7);
-            padding: 8px;
-            border-radius: 0 0 5px 5px;
-            margin-top: -8px;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
     # Load sample images
     sample_images = load_sample_images()
 
@@ -85,7 +55,7 @@ def create_sample_gallery():
         return None
     
     # Create a grid layout
-    cols = st.columns(4)
+    cols = st.columns(4)  # Adjust the number based on how many images per row you want
     
     for idx, img_data in enumerate(sample_images):
         col = cols[idx % 4]
@@ -94,25 +64,21 @@ def create_sample_gallery():
             img = PIL.Image.open(img_data['path'])
             img.thumbnail((200, 200))
             
-            # Create clickable image with container
-            with st.container():
-                if st.button("", key=f"sample_{idx}", help=f"Click to analyze {img_data['name']}"):
-                    st.session_state.selected_image = img_data['path']
-                    st.experimental_rerun()
-                
-                # Display image
-                st.image(
-                    img,
-                    caption=img_data['name'].split('.')[0],
-                    use_column_width=True
-                )
-                
-                # Add styled caption
-                st.markdown(
-                    f'<div class="image-caption">{img_data["name"].split(".")[0]}</div>',
-                    unsafe_allow_html=True
-                )
-
+            # Create clickable image
+            if st.button(
+                label="",
+                key=f"sample_{idx}",
+                help=f"Click to analyze {img_data['name']}",
+            ):
+                st.session_state.selected_image = img_data['path']
+            
+            # Display image
+            st.image(
+                img,
+                caption=img_data['name'].split('.')[0],
+                use_column_width=True
+            )
+    
     return st.session_state.selected_image
 
 def generate_explanation(img_path, model_prediction, confidence):
@@ -257,13 +223,13 @@ st.title("Brain Tumor Classification")
 
 # Add sample gallery
 if 'selected_image' not in st.session_state:
-  st.session_state.selected_image = None
+    st.session_state.selected_image = None
 
 selected_sample = create_sample_gallery()
 
 if st.session_state.selected_image is not None:
-  st.success(f"Analyzing selected image: {os.path.basename(st.session_state.selected_image)}")
-
+    st.success(f"Analyzing selected image: {os.path.basename(st.session_state.selected_image)}")
+    
 st.write("Upload an image of a brain MRI scan to classify.")
 
 uploaded_file = st.file_uploader("Choose an image...", type =["jpg", "jpeg", "png"])
