@@ -20,6 +20,9 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 output_dir = 'saliency_maps'
 os.makedirs(output_dir, exist_ok=True)
 
+if not os.path.exists("public/samples"):
+    os.makedirs("public/samples", exist_ok=True)
+
 def load_sample_images(folder_path="public/samples"):
     """Load sample images from the public folder"""
     if not os.path.exists(folder_path):
