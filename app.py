@@ -227,12 +227,6 @@ if 'selected_image' not in st.session_state:
 
 selected_sample = create_sample_gallery()
 
-if st.session_state.selected_image is not None:
-    st.success("Sample image selected! Analyzing...")
-    if st.button("Clear Selection"):
-        st.session_state.selected_image = None
-        st.experimental_rerun()
-
 st.write("Upload an image of a brain MRI scan to classify.")
 
 uploaded_file = st.file_uploader("Choose an image...", type =["jpg", "jpeg", "png"])
