@@ -104,7 +104,7 @@ Our models track:
 
 <div align="center">
   <h2>🙏 Thanks for Exploring Our Project! 🚀</h2>
-  <p><em>Made with ❤️ by AI enthusiasts for medical professionals</em></p>
+  <p><em>Made with ❤️ by AI enthusiasts for medical professionals from Headstarter</em></p>
 </div>
 
 </div>
