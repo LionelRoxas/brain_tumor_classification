@@ -104,7 +104,7 @@ Our models track:
 
 <div align="center">
   <h2>🙏 Thanks for Exploring Our Project! 🚀</h2>
-  <p><em>Made with ❤️ by Headstarter and implemented by Lionel Derrick Roxas for medical professionals</em></p>
+  <p><em>Made with ❤️ by Lionel Derrick Roxas for medical professionals</em></p>
 </div>
 
 </div>
